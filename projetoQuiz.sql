@@ -1,3 +1,6 @@
+create database projetoQUIZ;
+use projetoQUIZ;
+
 create table curso (
 	id_curso int auto_increment primary key,
     nome_curso varchar(100),
