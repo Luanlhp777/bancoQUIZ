@@ -3,21 +3,21 @@ use projetoQUIZ;
 
 create table curso (
 	id_curso int auto_increment primary key,
-    nome_curso varchar(100),
-    sigla varchar(20)
+    nome_curso varchar(100) not null,
+    sigla varchar(20) not null
 );
 
 create table usuario (
 	id_usuario int auto_increment primary key,
-    nome varchar(100),
-    email varchar(150) unique,
-    senha varchar(255),
+    nome varchar(100) not null,
+    email varchar(150) not null unique,
+    senha varchar(255) not null,
     data_cadastro datetime default current_timestamp
 );
 
 create table disciplina (
 	id_disciplina int auto_increment primary key,
-    nome_disciplina varchar(100),
+    nome_disciplina varchar(100) not null,
     id_curso int,
     foreign key (id_curso) references curso(id_curso)
 );
@@ -67,3 +67,22 @@ create table resposta (
     constraint fk_resposta_alternativa
 		foreign key (id_alternativa) references alternativa(id_alternativa)
 );
+
+insert into curso (nome_curso, sigla) values
+('Desenvolvimento de Sistemas', 'DS'),
+('Informática para Internet', 'IPI');
+
+insert into disciplina (nome_disciplina, id_curso) values
+('Banco de Dados', 1),
+('Desenvolvimento Web', 1),
+('Programação Orientada a Objetos', 1);
+
+insert into questao (enunciado, dificuldade, id_disciplina) values
+('Qual é a primeira função de um banco de dados relacionais?', 'Fácil', 1);
+
+insert into alternativa (texto_alternativo, correta, id_questao) values
+('Armazenar imagens e vídeos', false, 1),
+('Gerenciar grandes quantidades de dados estruturados', true, 1),
+('Criar páginas web', false, 1),
+('Executar comandos em sistemas operacionais', false, 1);
+
